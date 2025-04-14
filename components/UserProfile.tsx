@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface User {
   name: string;
   email: string;
@@ -16,7 +18,9 @@ export function UserProfile({ user }: UserProfileProps) {
   return (
     <div className="bg-zinc-800 rounded-lg p-8">
       <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
-        <img
+        <Image
+          width={128}
+          height={128}
           src={user.avatar}
           alt={user.name}
           className="w-32 h-32 rounded-full object-cover bg-zinc-700"
