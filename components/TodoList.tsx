@@ -19,8 +19,11 @@ export default function TodoList() {
     }
   };
 
+  const filteredTodos = (id: string) => {
+    return todos.filter(todo => todo.id !== id)
+  }
   const deleteTodo = (id: string) => {
-    setTodos(todos.filter(todo => todo.id !== id));
+    setTodos(filteredTodos(id));
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
