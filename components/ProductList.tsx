@@ -44,7 +44,7 @@ export function ProductList({ initialProducts }: ProductListProps) {
             <div className="text-sm text-blue-400 mb-2">{product.category}</div>
             <h3 className="text-xl font-semibold mb-2 line-clamp-2">{product.name}</h3>
             <p className="text-zinc-400 mb-4 line-clamp-3">{product.description}</p>
-            <p className="text-2xl font-bold">${product.price.toFixed(2)}</p>
+            <p className="text-2xl font-bold">€{product.price.toFixed(2)}</p>
           </div>
         </div>
       ))}
