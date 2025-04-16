@@ -48,8 +48,8 @@ export function UserProfile({ user }: UserProfileProps) {
             
             <div className="flex items-center gap-2">
               <span className="text-zinc-400">API Website:</span>
-              <a href={`https://${user.website}`} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">
-                {user.website}
+              <a href={`https://enriquedonaire.github.io/PicFinder-App`} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">
+                PicFinder
               </a>
             </div>
 
@@ -67,7 +67,7 @@ export function UserProfile({ user }: UserProfileProps) {
             
             <div className="flex items-center gap-2">
               <span className="text-zinc-400">Company:</span>
-              <span>{user.company}</span>
+              <span>PrisMatter</span>
             </div>
           </div>
         </div>
