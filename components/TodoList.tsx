@@ -36,7 +36,7 @@ export default function TodoList() {
           type="text"
           value={newTodo}
           onChange={(e) => setNewTodo(e.target.value)}
-          onKeyPress={handleKeyPress}
+          onKeyDown={handleKeyPress}
           placeholder="Add a new task..."
           className="flex-1 px-4 py-2 rounded-lg bg-zinc-800 border border-zinc-700 focus:outline-none focus:border-zinc-500"
         />
