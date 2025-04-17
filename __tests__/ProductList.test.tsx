@@ -9,7 +9,7 @@ jest.mock('next/navigation', () => ({
 
 jest.mock('next/image', () => ({
   __esModule: true,
-  default: (props: any) => <img {...props} />,
+  default: (props: any) => <img alt='imgTest'{...props} />,
 }));
 
 describe('ProductList', () => {
@@ -29,7 +29,7 @@ describe('ProductList', () => {
     
     expect(screen.getByText('Test Product')).toBeInTheDocument();
     expect(screen.getByText('Test Description')).toBeInTheDocument();
-    expect(screen.getByText('$99.99')).toBeInTheDocument();
+    expect(screen.getByText('€99.99')).toBeInTheDocument();
     expect(screen.getByText('Test Category')).toBeInTheDocument();
   });
 

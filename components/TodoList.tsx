@@ -20,8 +20,9 @@ export default function TodoList() {
   };
 
   const filteredTodos = (id: string) => {
-    return todos.filter(todo => todo.id !== id)
-  }
+    return todos.filter(todo => todo.id !== id);
+  };
+
   const deleteTodo = (id: string) => {
     setTodos(filteredTodos(id));
   };
@@ -62,6 +63,7 @@ export default function TodoList() {
             <button
               onClick={() => deleteTodo(todo.id)}
               className="text-zinc-500 hover:text-red-500 transition-colors"
+              aria-label="Delete todo"
             >
               <Trash2 className="w-4 h-4" />
             </button>

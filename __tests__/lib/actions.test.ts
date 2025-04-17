@@ -1,8 +1,8 @@
+/**
+ * @jest-environment jsdom
+ */
 import { getUserProfile, getProducts } from '@/lib/actions';
 import axios from 'axios';
-
-jest.mock('axios');
-const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe('API Actions', () => {
   describe('getUserProfile', () => {
@@ -12,15 +12,15 @@ describe('API Actions', () => {
       username: 'johndoe',
       phone: '1-770-736-8031',
       website: 'hildegard.org',
-      company: { name: 'Test Company' }
+      company: { name: 'Test Company' },
     };
 
     beforeEach(() => {
-      mockedAxios.get.mockReset();
+      (axios.get as jest.Mock).mockReset();
     });
 
     it('fetches and transforms user data correctly', async () => {
-      mockedAxios.get.mockResolvedValueOnce({ data: mockUserData });
+      (axios.get as jest.Mock).mockResolvedValueOnce({ data: mockUserData });
       
       const result = await getUserProfile();
       
@@ -36,7 +36,7 @@ describe('API Actions', () => {
     });
 
     it('handles API errors gracefully', async () => {
-      mockedAxios.get.mockRejectedValueOnce(new Error('API Error'));
+      (axios.get as jest.Mock).mockRejectedValueOnce(new Error('API Error'));
       
       await expect(getUserProfile()).rejects.toThrow('Failed to fetch user profile');
     });
@@ -50,31 +50,33 @@ describe('API Actions', () => {
         price: 99.99,
         description: 'Test Description',
         image: 'https://example.com/image.jpg',
-        category: 'Test Category'
-      }
+        category: 'Test Category',
+      },
     ];
 
     beforeEach(() => {
-      mockedAxios.get.mockReset();
+      (axios.get as jest.Mock).mockReset();
     });
 
     it('fetches and transforms products correctly', async () => {
-      mockedAxios.get.mockResolvedValueOnce({ data: mockProducts });
+      (axios.get as jest.Mock).mockResolvedValueOnce({ data: mockProducts });
       
       const result = await getProducts();
       
-      expect(result).toEqual([{
-        id: '1',
-        name: 'Test Product',
-        price: 99.99,
-        description: 'Test Description',
-        image: 'https://example.com/image.jpg',
-        category: 'Test Category'
-      }]);
+      expect(result).toEqual([
+        {
+          id: '1',
+          name: 'Test Product',
+          price: 99.99,
+          description: 'Test Description',
+          image: 'https://example.com/image.jpg',
+          category: 'Test Category',
+        },
+      ]);
     });
 
     it('handles API errors gracefully', async () => {
-      mockedAxios.get.mockRejectedValueOnce(new Error('API Error'));
+      (axios.get as jest.Mock).mockRejectedValueOnce(new Error('API Error'));
       
       await expect(getProducts()).rejects.toThrow('Failed to fetch products');
     });

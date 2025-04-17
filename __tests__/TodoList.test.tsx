@@ -1,4 +1,7 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+/**
+ * @jest-environment jsdom
+ */
+import { render, screen, fireEvent, within } from '@testing-library/react';
 import TodoList from '@/components/TodoList';
 
 describe('TodoList', () => {
@@ -23,7 +26,12 @@ describe('TodoList', () => {
     fireEvent.change(input, { target: { value: 'Todo to delete' } });
     fireEvent.click(addButton);
     
-    const deleteButton = screen.getByRole('button', { name: /delete/i });
+    const todoItem = screen.getByText('Todo to delete').closest('li');
+    if (!todoItem) {
+      throw new Error('Todo item not found');
+    }
+    
+    const deleteButton = within(todoItem).getByRole('button', { name: /delete todo/i });
     fireEvent.click(deleteButton);
     
     expect(screen.queryByText('Todo to delete')).not.toBeInTheDocument();
@@ -35,7 +43,7 @@ describe('TodoList', () => {
     const input = screen.getByPlaceholderText('Add a new task...');
     
     fireEvent.change(input, { target: { value: 'Enter Todo' } });
-    fireEvent.keyPress(input, { key: 'Enter', code: 13, charCode: 13 });
+    fireEvent.keyDown(input, { key: 'Enter', code: 'Enter' });
     
     expect(screen.getByText('Enter Todo')).toBeInTheDocument();
   });
