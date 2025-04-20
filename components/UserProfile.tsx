@@ -48,8 +48,8 @@ export function UserProfile({ user }: UserProfileProps) {
             
             <div className="flex items-center gap-2">
               <span className="text-zinc-400">API Website:</span>
-              <a href={`https://enriquedonaire.github.io/PicFinder-App`} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">
-                PicFinder
+              <a href={`https://jsonplaceholder.typicode.com`} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">
+              jsonplaceholder API
               </a>
             </div>
 
@@ -61,7 +61,7 @@ export function UserProfile({ user }: UserProfileProps) {
                 rel="noopener noreferrer" 
                 className="text-blue-400 hover:underline"
               >
-                enriquedonaire.github.io/Portfolio-Web-Dev
+                Portfolio - Enrique Donaire
               </a>
             </div>
             
