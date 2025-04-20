@@ -20,14 +20,14 @@ describe('UserProfile', () => {
     expect(screen.getByText(`@${mockUser.username}`)).toBeInTheDocument();
     expect(screen.getByText(mockUser.email)).toBeInTheDocument();
     expect(screen.getByText(mockUser.phone)).toBeInTheDocument();
-    expect(screen.getByText('PicFinder')).toBeInTheDocument();
+    expect(screen.getByText('jsonplaceholder API')).toBeInTheDocument();
     expect(screen.getByText(mockUser.company)).toBeInTheDocument();
   });
 
   it('renders portfolio link correctly', () => {
     render(<UserProfile user={mockUser} />);
     
-    const portfolioLink = screen.getByText('enriquedonaire.github.io/Portfolio-Web-Dev');
+    const portfolioLink = screen.getByText('Portfolio - Enrique Donaire');
     expect(portfolioLink).toBeInTheDocument();
     expect(portfolioLink).toHaveAttribute('href', 'https://enriquedonaire.github.io/Portfolio-Web-Dev');
   });
