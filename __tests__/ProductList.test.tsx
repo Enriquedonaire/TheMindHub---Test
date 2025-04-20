@@ -9,7 +9,9 @@ jest.mock('next/navigation', () => ({
 
 jest.mock('next/image', () => ({
   __esModule: true,
-  default: (props: any) => <img alt='imgTest'{...props} />,
+  default: ({fill, props}: any) => <img alt='imgTest'{...props} 
+  fill={fill ? 'true' : undefined}
+  />,
 }));
 
 describe('ProductList', () => {

@@ -17,13 +17,20 @@ describe('API Actions', () => {
 
     beforeEach(() => {
       (axios.get as jest.Mock).mockReset();
+      // Suprimir console.error para todas las pruebas
+      jest.spyOn(console, 'error').mockImplementation(() => {});
+    });
+
+    afterEach(() => {
+      // Restaurar console.error después de cada prueba
+      jest.spyOn(console, 'error').mockRestore();
     });
 
     it('fetches and transforms user data correctly', async () => {
       (axios.get as jest.Mock).mockResolvedValueOnce({ data: mockUserData });
-      
+
       const result = await getUserProfile();
-      
+
       expect(result).toEqual({
         name: mockUserData.name,
         email: mockUserData.email,
@@ -33,11 +40,12 @@ describe('API Actions', () => {
         website: mockUserData.website,
         company: mockUserData.company.name,
       });
+      expect(axios.get).toHaveBeenCalledWith('https://jsonplaceholder.typicode.com/users/1');
     });
 
     it('handles API errors gracefully', async () => {
       (axios.get as jest.Mock).mockRejectedValueOnce(new Error('API Error'));
-      
+
       await expect(getUserProfile()).rejects.toThrow('Failed to fetch user profile');
     });
   });
@@ -56,13 +64,20 @@ describe('API Actions', () => {
 
     beforeEach(() => {
       (axios.get as jest.Mock).mockReset();
+      // Suprimir console.error para todas las pruebas
+      jest.spyOn(console, 'error').mockImplementation(() => {});
+    });
+
+    afterEach(() => {
+      // Restaurar console.error después de cada prueba
+      jest.spyOn(console, 'error').mockRestore();
     });
 
     it('fetches and transforms products correctly', async () => {
       (axios.get as jest.Mock).mockResolvedValueOnce({ data: mockProducts });
-      
+
       const result = await getProducts();
-      
+
       expect(result).toEqual([
         {
           id: '1',
@@ -73,11 +88,12 @@ describe('API Actions', () => {
           category: 'Test Category',
         },
       ]);
+      expect(axios.get).toHaveBeenCalledWith('https://fakestoreapi.com/products');
     });
 
     it('handles API errors gracefully', async () => {
       (axios.get as jest.Mock).mockRejectedValueOnce(new Error('API Error'));
-      
+
       await expect(getProducts()).rejects.toThrow('Failed to fetch products');
     });
   });

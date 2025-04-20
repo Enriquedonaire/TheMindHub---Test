@@ -71,5 +71,3 @@ jest.mock('axios', () => {
     default: mockAxios,
   };
 });
-
-console.log('jest.setup.js is running');
