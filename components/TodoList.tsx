@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Plus, Trash2 } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 interface Todo {
   id: string;
@@ -11,12 +12,25 @@ interface Todo {
 export default function TodoList() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [newTodo, setNewTodo] = useState('');
+  const { toast } = useToast(); // Inicializamos el hook useToast
 
   const addTodo = () => {
-    if (newTodo.trim()) {
-      setTodos([...todos, { id: crypto.randomUUID(), text: newTodo.trim() }]);
-      setNewTodo('');
+    if (!newTodo.trim()) {
+      toast({
+        title: 'Error',
+        description: 'El campo no puede estar vacío.',
+      });
+      return;
     }
+
+    const newTodoItem = { id: crypto.randomUUID(), text: newTodo.trim() };
+    setTodos([...todos, newTodoItem]);
+    setNewTodo('');
+
+    toast({
+      title: 'Todo agregado',
+      description: `Se agregó "${newTodoItem.text}" a la lista.`,
+    });
   };
 
   const handleNewTodoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,11 +38,17 @@ export default function TodoList() {
   };
 
   const filteredTodos = (id: string) => {
-    return todos.filter(todo => todo.id !== id);
+    return todos.filter((todo) => todo.id !== id);
   };
 
   const deleteTodo = (id: string) => {
+    const todoToDelete = todos.find((todo) => todo.id === id);
     setTodos(filteredTodos(id));
+
+    toast({
+      title: 'Todo eliminado',
+      description: `Se eliminó "${todoToDelete?.text}" de la lista.`,
+    });
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
