@@ -12,8 +12,7 @@ interface Todo {
 export default function TodoList() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [newTodo, setNewTodo] = useState('');
-  const { toast } = useToast(); // Inicializamos el hook useToast
-
+  const { toast } = useToast(); 
   const addTodo = () => {
     if (!newTodo.trim()) {
       toast({

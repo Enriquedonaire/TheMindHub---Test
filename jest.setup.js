@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 
-// Polyfill para crypto.randomUUID
+
 if (!global.crypto) {
   global.crypto = {};
 }
@@ -12,7 +12,7 @@ global.crypto.randomUUID = () => {
   });
 };
 
-// Mock next/navigation
+
 jest.mock('next/navigation', () => ({
   useRouter: () => ({
     push: jest.fn(),
@@ -23,28 +23,28 @@ jest.mock('next/navigation', () => ({
   usePathname: () => '/',
 }));
 
-// Mock next/image
+
 jest.mock('next/image', () => ({
   __esModule: true,
   default: ({ src, alt, fill, className, ...props }) => {
-    // Filtrar props no válidos para <img>
+    
     const validProps = {};
-    const allowedProps = ['id', 'style', 'onClick', 'onMouseEnter', 'onMouseLeave']; // Añadir más si es necesario
+    const allowedProps = ['id', 'style', 'onClick', 'onMouseEnter', 'onMouseLeave']; 
     for (const key in props) {
       if (allowedProps.includes(key)) {
         validProps[key] = props[key];
       }
     }
 
-    // Aplicar estilos para fill
+    
     const fillStyles = fill
       ? { objectFit: 'cover', width: '100%', height: '100%', position: 'absolute' }
       : {};
 
-    // Combinar className si existe
+    
     const combinedClassName = [className, fill ? 'fill-image' : ''].filter(Boolean).join(' ');
 
-    // eslint-disable-next-line @next/next/no-img-element
+    
     return (
       <img
         src={src}
@@ -57,7 +57,7 @@ jest.mock('next/image', () => ({
   },
 }));
 
-// Mock axios
+
 jest.mock('axios', () => {
   const mockAxios = {
     get: jest.fn(() => Promise.resolve({ data: {} })),

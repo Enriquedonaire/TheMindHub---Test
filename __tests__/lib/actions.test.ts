@@ -17,12 +17,12 @@ describe('API Actions', () => {
 
     beforeEach(() => {
       (axios.get as jest.Mock).mockReset();
-      // Suprimir console.error para todas las pruebas
+
       jest.spyOn(console, 'error').mockImplementation(() => {});
     });
 
     afterEach(() => {
-      // Restaurar console.error después de cada prueba
+
       jest.spyOn(console, 'error').mockRestore();
     });
 
@@ -64,12 +64,11 @@ describe('API Actions', () => {
 
     beforeEach(() => {
       (axios.get as jest.Mock).mockReset();
-      // Suprimir console.error para todas las pruebas
       jest.spyOn(console, 'error').mockImplementation(() => {});
     });
 
     afterEach(() => {
-      // Restaurar console.error después de cada prueba
+
       jest.spyOn(console, 'error').mockRestore();
     });
 
